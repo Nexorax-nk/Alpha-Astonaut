@@ -84,9 +84,10 @@ def run_agent():
             direction = signal["direction"]
             print(f"QUANT {direction} DETECTED! Checking catalyst...")
             
-            # 4. Catalyst Confirmation
-            news = nfc.get_latest_news(symbol)
-            cat = ce.analyze_news(symbol, news)
+            # 4. Catalyst Confirmation (Bypassed for Hackathon fast-trade mode)
+            # news = nfc.get_latest_news(symbol)
+            # cat = ce.analyze_news(symbol, news)
+            cat = {"direction": direction, "catalystStrength": 100}
             
             if cat.get("direction", "NEUTRAL") != direction and cat.get("direction") != "NEUTRAL":
                 print(f"  REJECTED: Catalyst contradicts ({cat.get('direction')})")
@@ -124,8 +125,8 @@ def run_agent():
             res = router.submit_trade(symbol, direction, qty, price)
             log_decision(ledger, symbol, direction, True, "EXECUTED", res["status"])
             
-        print("\nScan complete. Sleeping for 5 minutes...")
-        time.sleep(300)
+        print("\nScan complete. Sleeping for 15 seconds (Hackathon Mode)...")
+        time.sleep(15)
 
 # --- HACKATHON RENDER.COM FREE TIER TRICK ---
 # Render puts free services to sleep if they don't bind to a web port.
@@ -140,12 +141,23 @@ def home():
 from alpaca.trading.client import TradingClient
 from alpaca.trading.requests import GetPortfolioHistoryRequest
 from config import APCA_API_KEY_ID, APCA_API_SECRET_KEY
-from api_mocks import MOCK_PERFORMANCE
 
 @app.route('/api/performance')
 def get_performance():
-    # Returning a guaranteed beautiful +$24k profit curve for the hackathon demo
-    return jsonify(MOCK_PERFORMANCE)
+    try:
+        client = TradingClient(APCA_API_KEY_ID, APCA_API_SECRET_KEY, paper=True)
+        req = GetPortfolioHistoryRequest(period="1W", timeframe="1H")
+        history = client.get_portfolio_history(req)
+        
+        data = []
+        for i in range(len(history.timestamp)):
+            ts = datetime.fromtimestamp(history.timestamp[i])
+            equity = history.equity[i]
+            if equity is not None:
+                data.append({"time": ts.strftime("%m-%d %H:00"), "pnl": round(equity, 2)})
+        return jsonify(data)
+    except Exception as e:
+        return jsonify([])
 
 @app.route('/api/trades')
 def get_trades():

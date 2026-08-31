@@ -73,24 +73,3 @@ def get_random_log():
     return event
 
 MOCK_ACTIVITY_INITIAL = [get_random_log() for _ in range(3)]
-
-from datetime import timedelta
-def generate_mock_performance():
-    data = []
-    base_equity = 100000
-    current_time = datetime.now()
-    
-    for i in range(40, -1, -1):
-        ts = current_time - timedelta(hours=i*2)
-        # Upward trending random walk (mostly wins, some small losses)
-        base_equity += random.uniform(-300, 1200) 
-        data.append({
-            "time": ts.strftime("%m-%d %H:00"),
-            "pnl": round(base_equity, 2)
-        })
-    
-    # Guarantee exactly $24,532.50 profit at the end
-    data[-1]["pnl"] = 124532.50
-    return data
-
-MOCK_PERFORMANCE = generate_mock_performance()

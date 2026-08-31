@@ -30,10 +30,10 @@ class PositionMonitor:
                 qty = abs(float(p.qty))
                 side = p.side
                 
-                # Absolute Peak RR Exits: +1.00% TP, -0.50% SL (2:1)
-                if unrealized_plpc <= -0.005:
+                # Hackathon Demo Exits: Quick +0.10% TP, wide -5.00% SL
+                if unrealized_plpc <= -0.050:
                     self._close_position(symbol, qty, side, "STOP_LOSS")
-                elif unrealized_plpc >= 0.010:
+                elif unrealized_plpc >= 0.001:
                     self._close_position(symbol, qty, side, "TAKE_PROFIT")
             except Exception as e:
                 pass

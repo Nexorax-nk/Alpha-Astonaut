@@ -46,7 +46,7 @@ class QuantSignalEngineV3:
         return df
 
     def calculate_score(self, historical_slice: pd.DataFrame) -> dict:
-        if len(historical_slice) < 5:
+        if len(historical_slice) < 5 or 'RSI' not in historical_slice.columns:
             return {"direction": "NEUTRAL", "is_valid": False}
             
         curr = historical_slice.iloc[-1]

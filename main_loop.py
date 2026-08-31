@@ -7,7 +7,8 @@ import os
 import csv
 import threading
 from datetime import datetime
-from flask import Flask
+from flask import Flask, jsonify
+from flask_cors import CORS
 from config import UNIVERSE
 from data_feed.market_data import MarketDataClient
 from data_feed.news_feed import NewsFeedClient
@@ -130,15 +131,85 @@ def run_agent():
 # Render puts free services to sleep if they don't bind to a web port.
 # We spin up a fake web server and run the bot in a background thread.
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
-def keep_alive():
-    return "Alpha Astronaut is RUNNING 24/7!"
+def home():
+    return "Alpha Astronaut is running!"
+
+from alpaca.trading.client import TradingClient
+from alpaca.trading.requests import GetPortfolioHistoryRequest
+from config import APCA_API_KEY_ID, APCA_API_SECRET_KEY
+
+@app.route('/api/performance')
+def get_performance():
+    try:
+        client = TradingClient(APCA_API_KEY_ID, APCA_API_SECRET_KEY, paper=True)
+        req = GetPortfolioHistoryRequest(period="1W", timeframe="1H")
+        history = client.get_portfolio_history(req)
+        
+        data = []
+        for i in range(len(history.timestamp)):
+            ts = datetime.fromtimestamp(history.timestamp[i])
+            equity = history.equity[i]
+            if equity is not None:
+                data.append({"time": ts.strftime("%m-%d %H:00"), "pnl": round(equity, 2)})
+        return jsonify(data)
+    except Exception as e:
+        return jsonify([])
+
+@app.route('/api/trades')
+def get_trades():
+    trades = []
+    try:
+        with open("logs/trade_ledger.csv", "r") as f:
+            reader = csv.DictReader(f)
+            trades = list(reader)
+        trades.reverse()
+    except Exception:
+        pass
+    return jsonify(trades)
+
+@app.route('/api/stats')
+def get_stats():
+    total_trades = 0
+    try:
+        with open("logs/trade_ledger.csv", "r") as f:
+            total_trades = sum(1 for line in f) - 1
+    except Exception:
+        pass
+    return jsonify({"total_trades": max(0, total_trades), "status": "Active"})
 
 def start_bot_thread():
     bot_thread = threading.Thread(target=run_agent)
     bot_thread.daemon = True
     bot_thread.start()
+
+from api_mocks import MOCK_SCANNER, MOCK_POSITIONS, MOCK_HISTORY, MOCK_BACKTESTS, MOCK_ACTIVITY_INITIAL, get_random_log
+
+@app.route('/api/scanner')
+def get_scanner():
+    return jsonify(MOCK_SCANNER)
+
+@app.route('/api/live_positions')
+def get_live_positions():
+    return jsonify(MOCK_POSITIONS)
+
+@app.route('/api/trade_history')
+def get_trade_history():
+    return jsonify(MOCK_HISTORY)
+
+@app.route('/api/backtests')
+def get_backtests():
+    return jsonify(MOCK_BACKTESTS)
+
+@app.route('/api/activity_log')
+def get_activity_log():
+    return jsonify(MOCK_ACTIVITY_INITIAL)
+
+@app.route('/api/activity_log_stream')
+def get_activity_stream():
+    return jsonify(get_random_log())
 
 if __name__ == "__main__":
     start_bot_thread()

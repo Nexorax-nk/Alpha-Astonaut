@@ -36,17 +36,26 @@ function App() {
   ];
 
   return (
-    <div className="flex h-screen bg-app-bg text-black font-sans overflow-hidden selection:bg-alpaca-yellow selection:text-black">
+    <div 
+      className="flex h-screen text-black font-sans overflow-hidden selection:bg-alpaca-yellow selection:text-black bg-app-bg"
+      style={{
+        backgroundImage: 'url(/bg-candles.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundBlendMode: 'multiply'
+      }}
+    >
       
       {/* SIDEBAR NAVIGATION */}
-      <nav className="w-64 bg-card-bg text-white flex flex-col">
-        <div className="p-6 mb-2 flex items-center gap-3">
-          <div className="bg-alpaca-yellow text-black p-2 rounded-lg">
-            <Rocket size={24} strokeWidth={2.5} />
+      <nav className="w-72 bg-card-bg text-white flex flex-col shadow-2xl relative z-20">
+        <div className="p-8 pb-6 flex items-center gap-4 border-b border-white/10 mb-4">
+          <div className="bg-alpaca-yellow text-black p-2.5 rounded-xl shadow-[0_0_15px_rgba(255,206,0,0.3)]">
+            <Rocket size={26} strokeWidth={2.5} />
           </div>
           <div>
-            <h1 className="font-bold text-lg leading-tight tracking-tight">Alpha Astronaut</h1>
-            <div className="flex items-center gap-2 mt-1">
+            <h1 className="font-extrabold text-xl leading-tight tracking-tight">Alpha Astronaut</h1>
+            <div className="flex items-center gap-2 mt-1.5">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-positive opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-positive"></span>
@@ -56,7 +65,7 @@ function App() {
           </div>
         </div>
 
-        <div className="flex-1 px-4 space-y-1">
+        <div className="flex-1 px-4 py-2 space-y-1.5 overflow-y-auto">
           {navItems.map(item => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -64,22 +73,23 @@ function App() {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-all duration-200 ${
                   isActive 
-                    ? 'bg-white/10 text-white' 
-                    : 'text-text-muted hover:text-white hover:bg-white/5'
+                    ? 'bg-white/10 text-white shadow-inner translate-x-1' 
+                    : 'text-text-muted hover:text-white hover:bg-white/5 hover:translate-x-1'
                 }`}
               >
-                <Icon size={18} className={isActive ? 'text-alpaca-yellow' : ''} />
+                <Icon size={20} className={isActive ? 'text-alpaca-yellow' : 'opacity-70'} />
                 {item.label}
               </button>
             )
           })}
         </div>
         
-        <div className="p-6">
-          <div className="bg-white/5 rounded p-3 text-xs text-center text-text-muted">
-            Hackathon Build v2.0
+        <div className="p-6 mt-auto border-t border-white/5">
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+            <p className="text-xs font-bold text-white mb-1">Hackathon Build v2.0</p>
+            <p className="text-[10px] text-text-muted">High-Frequency Mode</p>
           </div>
         </div>
       </nav>

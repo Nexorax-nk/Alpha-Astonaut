@@ -34,7 +34,7 @@ export function SpotlightCard({ children, className = "" }) {
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative rounded-xl border border-alpaca-border bg-alpaca-panel overflow-hidden p-6 shadow-2xl transition-transform hover:-translate-y-1 ${className}`}
+      className={`relative rounded-xl bg-card-bg overflow-hidden p-6 shadow-xl transition-transform hover:-translate-y-1 ${className}`}
     >
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"

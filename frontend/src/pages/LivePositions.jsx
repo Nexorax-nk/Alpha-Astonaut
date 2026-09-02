@@ -19,7 +19,7 @@ export function LivePositions() {
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <Layers className="text-alpaca-yellow" /> Live Positions
         </h1>
-        <p className="text-alpaca-muted mt-2">Active trades currently being managed by the risk engine.</p>
+        <p className="text-text-muted mt-2">Active trades currently being managed by the risk engine.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -43,32 +43,32 @@ export function LivePositions() {
 
               <div className="space-y-4 mb-6 flex-1">
                 <div className="flex justify-between">
-                  <span className="text-alpaca-muted text-sm">Entry:</span>
-                  <span className="font-medium">${pos.entry.toFixed(2)}</span>
+                  <span className="text-text-muted text-sm">Entry:</span>
+                  <span className="font-medium font-mono text-white">${pos.entry.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-alpaca-muted text-sm">Current:</span>
-                  <span className="font-bold">${pos.current.toFixed(2)}</span>
+                  <span className="text-text-muted text-sm">Current:</span>
+                  <span className="font-bold font-mono text-white">${pos.current.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between border-b border-alpaca-border/50 pb-4">
-                  <span className="text-alpaca-muted text-sm">P&L:</span>
-                  <span className={`font-bold ${pos.pnl > 0 ? 'text-positive' : 'text-negative'}`}>
+                <div className="flex justify-between border-b border-white/10 pb-4">
+                  <span className="text-text-muted text-sm">P&L:</span>
+                  <span className={`font-bold font-mono ${pos.pnl > 0 ? 'text-positive' : 'text-negative'}`}>
                     {pos.pnl > 0 ? '+' : ''}${Math.abs(pos.pnl).toLocaleString()} ({pos.roi}%)
                   </span>
                 </div>
                 
                 <div className="flex justify-between">
-                  <span className="text-alpaca-muted text-sm">Risk (Max Loss):</span>
-                  <span className="font-medium">${pos.risk.toLocaleString()}</span>
+                  <span className="text-text-muted text-sm">Risk (Max Loss):</span>
+                  <span className="font-medium font-mono text-white">${pos.risk.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-alpaca-muted text-sm">Max Profit (Target):</span>
-                  <span className="font-medium text-positive">${pos.maxProfit.toLocaleString()}</span>
+                  <span className="text-text-muted text-sm">Max Profit (Target):</span>
+                  <span className="font-medium font-mono text-positive">${pos.maxProfit.toLocaleString()}</span>
                 </div>
               </div>
 
-              <div className="bg-black/40 rounded p-3 flex justify-between items-center mt-auto">
-                <span className="text-alpaca-muted text-xs">Time Held:</span>
+              <div className="bg-white/5 rounded p-3 flex justify-between items-center mt-auto">
+                <span className="text-text-muted text-xs">Time Held:</span>
                 <span className="text-sm font-bold text-white">{pos.timeHeld}</span>
               </div>
             </SpotlightCard>

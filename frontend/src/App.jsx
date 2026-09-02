@@ -36,11 +36,11 @@ function App() {
   ];
 
   return (
-    <div className="flex h-screen bg-alpaca-dark text-white font-sans overflow-hidden selection:bg-alpaca-yellow selection:text-black">
+    <div className="flex h-screen bg-app-bg text-black font-sans overflow-hidden selection:bg-alpaca-yellow selection:text-black">
       
       {/* SIDEBAR NAVIGATION */}
-      <nav className="w-64 bg-black border-r border-alpaca-border flex flex-col">
-        <div className="p-6 border-b border-alpaca-border mb-6 flex items-center gap-3">
+      <nav className="w-64 bg-card-bg text-white flex flex-col">
+        <div className="p-6 mb-2 flex items-center gap-3">
           <div className="bg-alpaca-yellow text-black p-2 rounded-lg">
             <Rocket size={24} strokeWidth={2.5} />
           </div>
@@ -51,12 +51,12 @@ function App() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-positive opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-positive"></span>
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-alpaca-muted font-bold">Systems Online</span>
+              <span className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Systems Online</span>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 px-4 space-y-2">
+        <div className="flex-1 px-4 space-y-1">
           {navItems.map(item => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -64,10 +64,10 @@ function App() {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                   isActive 
-                    ? 'bg-alpaca-panel text-white border border-alpaca-border shadow-md' 
-                    : 'text-alpaca-muted hover:text-white hover:bg-white/5 border border-transparent'
+                    ? 'bg-white/10 text-white' 
+                    : 'text-text-muted hover:text-white hover:bg-white/5'
                 }`}
               >
                 <Icon size={18} className={isActive ? 'text-alpaca-yellow' : ''} />
@@ -77,9 +77,9 @@ function App() {
           })}
         </div>
         
-        <div className="p-6 border-t border-alpaca-border">
-          <div className="bg-alpaca-panel border border-alpaca-border rounded p-3 text-xs text-center text-alpaca-muted">
-            Hackathon Build v1.0.0
+        <div className="p-6">
+          <div className="bg-white/5 rounded p-3 text-xs text-center text-text-muted">
+            Hackathon Build v2.0
           </div>
         </div>
       </nav>

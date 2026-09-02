@@ -2,13 +2,20 @@
 
 @theme {
   --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
   
   --color-alpaca-yellow: #FFCE00;
-  --color-alpaca-dark: #0C0A09;
-  --color-alpaca-panel: #1C1917;
-  --color-alpaca-muted: #44403C;
-  --color-alpaca-border: #D6D3D1;
   
+  /* App background */
+  --color-app-bg: #F8FAFC; 
+  /* Component backgrounds (solid black) */
+  --color-card-bg: #09090B; 
+  
+  /* Text colors */
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #A1A1AA;
+  
+  /* Status colors */
   --color-positive: #22C55E;
   --color-negative: #EF4444;
 
@@ -21,23 +28,23 @@
 }
 
 body {
-  background-color: var(--color-alpaca-dark);
-  color: white;
+  background-color: var(--color-app-bg);
+  color: #09090B; /* Default body text is black */
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Scrollbar for dark theme */
+/* Custom Scrollbar for white background */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background-color: var(--color-alpaca-dark);
+  background-color: var(--color-app-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-alpaca-muted);
+  background-color: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-alpaca-yellow);
+  background-color: #94A3B8;
 }

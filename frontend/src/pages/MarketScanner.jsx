@@ -22,22 +22,22 @@ export function MarketScanner() {
         <p className="text-alpaca-muted mt-2">Real-time quantitative analysis of market breadth, momentum, and volume anomalies.</p>
       </div>
 
-      <div className="bg-alpaca-panel border border-alpaca-border rounded-xl overflow-hidden shadow-2xl">
+      <div className="bg-card-bg rounded-xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-alpaca-border bg-black/40">
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">Symbol</th>
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">Price</th>
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">Change</th>
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">RVOL</th>
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">VWAP</th>
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">ATR</th>
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">Signal</th>
-                <th className="p-4 text-alpaca-muted font-semibold text-sm uppercase">Score</th>
+              <tr className="border-b border-white/10 bg-white/5">
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">Symbol</th>
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">Price</th>
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">Change</th>
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">RVOL</th>
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">VWAP</th>
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">ATR</th>
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">Signal</th>
+                <th className="p-4 text-text-muted font-semibold text-sm uppercase">Score</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-alpaca-border">
+            <tbody className="divide-y divide-white/5 text-white">
               {scans.map((scan, idx) => (
                 <motion.tr 
                   initial={{ opacity: 0, x: -10 }}
@@ -47,27 +47,27 @@ export function MarketScanner() {
                   className="hover:bg-white/5 transition-colors"
                 >
                   <td className="p-4 font-bold text-lg">{scan.symbol}</td>
-                  <td className="p-4">${scan.price.toFixed(2)}</td>
-                  <td className={`p-4 font-medium ${scan.change > 0 ? 'text-positive' : 'text-negative'}`}>
+                  <td className="p-4 font-mono">${scan.price.toFixed(2)}</td>
+                  <td className={`p-4 font-medium font-mono ${scan.change > 0 ? 'text-positive' : 'text-negative'}`}>
                     {scan.change > 0 ? '+' : ''}{scan.change}%
                   </td>
-                  <td className="p-4">{scan.rvol}x</td>
-                  <td className="p-4 text-alpaca-muted">{scan.vwap}</td>
-                  <td className="p-4 text-alpaca-muted">{scan.atr}</td>
+                  <td className="p-4 font-mono">{scan.rvol}x</td>
+                  <td className="p-4 text-text-muted font-mono">{scan.vwap}</td>
+                  <td className="p-4 text-text-muted font-mono">{scan.atr}</td>
                   <td className="p-4">
-                    {scan.signal === 'CALL' && <span className="bg-positive/10 text-positive px-2 py-1 rounded font-bold text-xs">🟢 CALL</span>}
-                    {scan.signal === 'PUT' && <span className="bg-negative/10 text-negative px-2 py-1 rounded font-bold text-xs">🔴 PUT</span>}
-                    {scan.signal === 'WAIT' && <span className="bg-alpaca-muted/10 text-alpaca-muted px-2 py-1 rounded font-bold text-xs">⚪ WAIT</span>}
+                    {scan.signal === 'CALL' && <span className="bg-positive/10 text-positive px-2 py-1 rounded font-bold text-xs">🟢 LONG</span>}
+                    {scan.signal === 'PUT' && <span className="bg-negative/10 text-negative px-2 py-1 rounded font-bold text-xs">🔴 SHORT</span>}
+                    {scan.signal === 'WAIT' && <span className="bg-white/10 text-text-muted px-2 py-1 rounded font-bold text-xs">⚪ WAIT</span>}
                   </td>
                   <td className="p-4">
                     <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 bg-black rounded-full overflow-hidden w-16">
+                      <div className="flex-1 h-2 bg-black rounded-full overflow-hidden w-16 border border-white/10">
                         <div 
-                          className={`h-full ${scan.score > 80 ? 'bg-positive' : scan.score > 50 ? 'bg-alpaca-yellow' : 'bg-alpaca-muted'}`} 
+                          className={`h-full ${scan.score > 80 ? 'bg-positive' : scan.score > 50 ? 'bg-alpaca-yellow' : 'bg-white/20'}`} 
                           style={{ width: `${scan.score}%` }}
                         />
                       </div>
-                      <span className="font-bold text-sm">{scan.score}</span>
+                      <span className="font-bold text-sm font-mono">{scan.score}</span>
                     </div>
                   </td>
                 </motion.tr>

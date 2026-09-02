@@ -19,14 +19,14 @@ export function ResearchLab() {
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <FlaskConical className="text-alpaca-yellow" /> Backtest & Research Lab
         </h1>
-        <p className="text-alpaca-muted mt-2">Data-driven strategy selection. Showing 4 evaluated algorithms.</p>
+        <p className="text-text-muted mt-2">Data-driven strategy selection. Showing 4 evaluated algorithms.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Rejected Strategies List */}
         <div className="lg:col-span-1 space-y-4">
-          <h2 className="text-xl font-bold mb-4 border-b border-alpaca-border pb-2">Evaluated Strategies</h2>
+          <h2 className="text-xl font-bold mb-4 border-b border-white/10 pb-2">Evaluated Strategies</h2>
           {backtests.map((strat, idx) => (
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
@@ -34,7 +34,7 @@ export function ResearchLab() {
               transition={{ delay: idx * 0.1 }}
               key={idx}
             >
-              <div className={`p-4 rounded-lg border ${strat.selected ? 'bg-alpaca-yellow/10 border-alpaca-yellow' : 'bg-alpaca-panel border-alpaca-border opacity-70'}`}>
+              <div className={`p-4 rounded-lg border ${strat.selected ? 'bg-alpaca-yellow/10 border-alpaca-yellow' : 'bg-card-bg border-white/5 opacity-70'}`}>
                 <div className="flex justify-between items-center mb-2">
                   <h3 className={`font-bold ${strat.selected ? 'text-alpaca-yellow' : 'text-white'}`}>{strat.name}</h3>
                   {strat.selected ? <CheckCircle2 className="text-alpaca-yellow" size={18} /> : <XCircle className="text-negative" size={18} />}
@@ -58,7 +58,7 @@ export function ResearchLab() {
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b border-alpaca-border text-alpaca-muted text-sm uppercase">
+                  <tr className="border-b border-white/10 text-text-muted text-sm uppercase">
                     <th className="pb-3">Strategy</th>
                     <th className="pb-3">Win Rate</th>
                     <th className="pb-3">Profit Factor</th>
@@ -66,16 +66,16 @@ export function ResearchLab() {
                     <th className="pb-3">Total Return</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-alpaca-border/50">
+                <tbody className="divide-y divide-white/5 text-white">
                   {backtests.map((strat, idx) => (
                     <tr key={idx} className={strat.selected ? 'bg-white/5' : ''}>
                       <td className={`py-4 font-bold ${strat.selected ? 'text-alpaca-yellow' : ''}`}>{strat.name}</td>
-                      <td className="py-4">{strat.winRate}%</td>
-                      <td className="py-4">{strat.profitFactor}</td>
-                      <td className={`py-4 font-medium ${strat.expectancy > 0 ? 'text-positive' : 'text-negative'}`}>
+                      <td className="py-4 font-mono">{strat.winRate}%</td>
+                      <td className="py-4 font-mono">{strat.profitFactor}</td>
+                      <td className={`py-4 font-medium font-mono ${strat.expectancy > 0 ? 'text-positive' : 'text-negative'}`}>
                         {strat.expectancy > 0 ? '+' : ''}${strat.expectancy}
                       </td>
-                      <td className={`py-4 font-bold ${strat.return > 0 ? 'text-positive' : 'text-negative'}`}>
+                      <td className={`py-4 font-bold font-mono ${strat.return > 0 ? 'text-positive' : 'text-negative'}`}>
                         {strat.return > 0 ? '+' : ''}{strat.return}%
                       </td>
                     </tr>
@@ -84,7 +84,7 @@ export function ResearchLab() {
               </table>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-alpaca-border text-sm text-alpaca-muted">
+            <div className="mt-8 pt-6 border-t border-white/10 text-sm text-text-muted">
               <p><span className="text-white font-medium">Dataset:</span> Jan 1, 2024 — Aug 25, 2026</p>
               <p><span className="text-white font-medium">Symbols:</span> SPY, QQQ, NVDA, AAPL, TSLA</p>
               <p><span className="text-white font-medium">Timeframe:</span> 5-Minute Candles</p>

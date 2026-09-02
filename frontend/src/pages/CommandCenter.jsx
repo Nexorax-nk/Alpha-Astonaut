@@ -57,11 +57,11 @@ export function CommandCenter({ performance, stats }) {
               <p className="text-xl font-medium text-white">${buyingPower.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
             </div>
             
-            <div className="pt-4 border-t border-white/5">
-              <p className="text-alpaca-muted text-xs font-semibold uppercase mb-1 flex items-center gap-1">
+            <div className="pt-4 border-t border-white/10">
+              <p className="text-text-muted text-xs font-semibold uppercase mb-1 flex items-center gap-1">
                 Total P&L <DollarSign size={12}/>
               </p>
-              <p className={`text-2xl font-bold ${totalPnl >= 0 ? 'text-positive' : 'text-negative'}`}>
+              <p className={`text-2xl font-mono font-bold ${totalPnl >= 0 ? 'text-positive' : 'text-negative'}`}>
                 {totalPnl >= 0 ? '+' : ''}${Math.abs(totalPnl).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </p>
             </div>
@@ -83,8 +83,8 @@ export function CommandCenter({ performance, stats }) {
         </SpotlightCard>
 
         {/* AGENT STATUS */}
-        <SpotlightCard className="bg-black/60 border border-alpaca-yellow/30 relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 text-alpaca-yellow/10">
+        <SpotlightCard className="relative overflow-hidden">
+          <div className="absolute -top-10 -right-10 text-white/5">
             <Cpu size={120} />
           </div>
           <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4 relative z-10">
@@ -108,16 +108,16 @@ export function CommandCenter({ performance, stats }) {
               <span className="text-white font-medium">OPEN</span>
             </div>
             <div className="flex justify-between border-b border-white/5 pb-2">
-              <span className="text-alpaca-muted text-sm">Last Scan</span>
+              <span className="text-text-muted text-sm">Last Scan</span>
               <span className="text-white font-mono">Just now</span>
             </div>
             <div className="flex justify-between border-b border-white/5 pb-2">
-              <span className="text-alpaca-muted text-sm">Next Scan</span>
+              <span className="text-text-muted text-sm">Next Scan</span>
               <span className="text-white font-mono">In 60s</span>
             </div>
             <div className="flex justify-between pt-2">
-              <span className="text-alpaca-muted text-sm">Markets Scanned</span>
-              <span className="text-alpaca-yellow font-bold">12</span>
+              <span className="text-text-muted text-sm">Markets Scanned</span>
+              <span className="text-alpaca-yellow font-bold font-mono">12</span>
             </div>
           </div>
         </SpotlightCard>
@@ -134,28 +134,28 @@ export function CommandCenter({ performance, stats }) {
           
           <div className="space-y-4">
             <div className="flex justify-between items-center bg-white/5 p-3 rounded-lg">
-              <span className="text-alpaca-muted text-sm">Total Trades</span>
-              <span className="text-white font-bold text-lg">{totalTrades}</span>
+              <span className="text-text-muted text-sm">Total Trades</span>
+              <span className="text-white font-bold text-lg font-mono">{totalTrades}</span>
             </div>
             <div className="flex justify-between items-center bg-white/5 p-3 rounded-lg">
-              <span className="text-alpaca-muted text-sm">Open Positions</span>
-              <span className="text-alpaca-yellow font-bold text-lg">{openPositions}</span>
+              <span className="text-text-muted text-sm">Open Positions</span>
+              <span className="text-alpaca-yellow font-bold text-lg font-mono">{openPositions}</span>
             </div>
             <div className="flex justify-between items-center bg-white/5 p-3 rounded-lg">
-              <span className="text-alpaca-muted text-sm">Closed Positions</span>
-              <span className="text-white font-bold text-lg">{Math.max(0, totalTrades - openPositions)}</span>
+              <span className="text-text-muted text-sm">Closed Positions</span>
+              <span className="text-white font-bold text-lg font-mono">{Math.max(0, totalTrades - openPositions)}</span>
             </div>
             <div className="flex justify-between items-center p-2">
-              <span className="text-alpaca-muted text-sm">Winning Trades</span>
-              <span className="text-positive font-bold">{winningTrades}</span>
+              <span className="text-text-muted text-sm">Winning Trades</span>
+              <span className="text-positive font-bold font-mono">{winningTrades}</span>
             </div>
             <div className="flex justify-between items-center p-2">
-              <span className="text-alpaca-muted text-sm">Losing Trades</span>
-              <span className="text-negative font-bold">{losingTrades}</span>
+              <span className="text-text-muted text-sm">Losing Trades</span>
+              <span className="text-negative font-bold font-mono">{losingTrades}</span>
             </div>
             <div className="pt-4 border-t border-white/10 mt-2 text-center">
-              <p className="text-alpaca-muted text-xs uppercase mb-1">Win Rate</p>
-              <p className="text-3xl font-black text-white">{winRate}%</p>
+              <p className="text-text-muted text-xs uppercase mb-1">Win Rate</p>
+              <p className="text-3xl font-black text-white font-mono">{winRate}%</p>
             </div>
           </div>
         </SpotlightCard>

@@ -25,16 +25,15 @@ export function CommandCenter({ performance, stats }) {
   const losingTrades = totalTrades - winningTrades;
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500 pb-10">
+    <div className="h-full flex flex-col space-y-4 animate-in fade-in duration-500 pb-4">
       
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between shrink-0">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Command Center</h1>
-          <p className="text-alpaca-muted mt-1">Live autonomous agent metrics and portfolio overview</p>
+          <h1 className="text-2xl font-bold text-black tracking-tight">Welcome back, Alpha Astronaut</h1>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 shrink-0">
         
         {/* ACCOUNT OVERVIEW */}
         <SpotlightCard className="col-span-1 lg:col-span-2">
@@ -45,15 +44,15 @@ export function CommandCenter({ performance, stats }) {
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             <div>
-              <p className="text-alpaca-muted text-xs font-semibold uppercase mb-1">Starting Balance</p>
+              <p className="text-text-muted text-xs font-semibold uppercase mb-1">Starting Balance</p>
               <p className="text-xl font-medium text-white">$100,000.00</p>
             </div>
             <div>
-              <p className="text-alpaca-muted text-xs font-semibold uppercase mb-1">Current Value</p>
+              <p className="text-text-muted text-xs font-semibold uppercase mb-1">Current Value</p>
               <p className="text-2xl font-bold text-white">${currentEquity.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
             </div>
             <div>
-              <p className="text-alpaca-muted text-xs font-semibold uppercase mb-1">Buying Power</p>
+              <p className="text-text-muted text-xs font-semibold uppercase mb-1">Buying Power</p>
               <p className="text-xl font-medium text-white">${buyingPower.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
             </div>
             
@@ -66,13 +65,13 @@ export function CommandCenter({ performance, stats }) {
               </p>
             </div>
             <div className="pt-4 border-t border-white/5">
-              <p className="text-alpaca-muted text-xs font-semibold uppercase mb-1">Realized P&L</p>
+              <p className="text-text-muted text-xs font-semibold uppercase mb-1">Realized P&L</p>
               <p className={`text-xl font-medium ${realized >= 0 ? 'text-positive' : 'text-negative'}`}>
                 {realized >= 0 ? '+' : ''}${Math.abs(realized).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div className="pt-4 border-t border-white/5">
-              <p className="text-alpaca-muted text-xs font-semibold uppercase mb-1 flex items-center gap-1">
+              <p className="text-text-muted text-xs font-semibold uppercase mb-1 flex items-center gap-1">
                 Return <Percent size={12}/>
               </p>
               <p className={`text-xl font-bold ${pnlPercent >= 0 ? 'text-positive' : 'text-negative'}`}>
@@ -100,11 +99,11 @@ export function CommandCenter({ performance, stats }) {
           
           <div className="relative z-10 space-y-4">
             <div className="flex justify-between items-end">
-              <span className="text-alpaca-muted text-sm font-medium">System Status</span>
+              <span className="text-text-muted text-sm font-medium">System Status</span>
               <span className="text-xl font-bold text-positive tracking-widest">ONLINE</span>
             </div>
             <div className="flex justify-between border-b border-white/5 pb-2">
-              <span className="text-alpaca-muted text-sm">Market State</span>
+              <span className="text-text-muted text-sm">Market State</span>
               <span className="text-white font-medium">OPEN</span>
             </div>
             <div className="flex justify-between border-b border-white/5 pb-2">
@@ -123,7 +122,7 @@ export function CommandCenter({ performance, stats }) {
         </SpotlightCard>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 flex-1 min-h-0">
         
         {/* TRADING STATS */}
         <SpotlightCard className="col-span-1 lg:col-span-1">
@@ -167,11 +166,11 @@ export function CommandCenter({ performance, stats }) {
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">Equity Curve</h2>
           </div>
           
-          <div className="flex-1 min-h-[350px]">
+          <div className="flex-1 min-h-0">
             {performance && performance.length > 0 ? (
               <PerformanceChart data={performance} />
             ) : (
-              <div className="h-full w-full flex items-center justify-center text-alpaca-muted border border-dashed border-alpaca-border rounded-lg bg-black/20">
+              <div className="h-full w-full flex items-center justify-center text-text-muted border border-dashed border-alpaca-border rounded-lg bg-black/20">
                 <div className="text-center">
                   <TrendingUp size={48} className="mx-auto mb-4 opacity-20" />
                   <p>Awaiting portfolio history data...</p>

@@ -27,11 +27,11 @@ MAX_TOTAL_PORTFOLIO_RISK_PCT = 0.06  # Max 6% total portfolio risk across all po
 MAX_CONCURRENT_POSITIONS = 4        # No more than 4 stocks held at once
 MAX_SINGLE_POSITION_PCT = 0.25      # No more than 25% of equity in one stock
 
-# --- Exit Thresholds ---
-TAKE_PROFIT_PCT = 0.015             # +1.5% take profit
-STOP_LOSS_PCT = 0.008               # -0.8% stop loss (1.875:1 reward/risk)
-TRAILING_STOP_ACTIVATION_PCT = 0.010  # Activate trailing stop at +1.0%
-TRAILING_STOP_PCT = 0.001           # Trail by 0.1% above breakeven
+# --- Exit Thresholds (Hyper-Scalping Mode) ---
+TAKE_PROFIT_PCT = 0.004             # +0.4% take profit (rapid lock-in)
+STOP_LOSS_PCT = 0.003               # -0.3% stop loss (tight risk)
+TRAILING_STOP_ACTIVATION_PCT = 0.002  # Activate trailing stop at +0.2%
+TRAILING_STOP_PCT = 0.001           # Trail by 0.1%
 
 # --- Scan Timing ---
 SCAN_INTERVAL_MARKET_OPEN = 60      # 60 seconds during market hours

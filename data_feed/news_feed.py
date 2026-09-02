@@ -18,11 +18,15 @@ class NewsFeedClient:
         req = NewsRequest(symbols=symbol, limit=limit)
         try:
             news = self.client.get_news(req)
-            if not news.news:
+            if not news:
+                return "No recent news found."
+                
+            news_list = getattr(news, 'news', getattr(news, 'data', []))
+            if not news_list:
                 return "No recent news found."
                 
             news_block = f"Recent news for {symbol}:\n"
-            for item in news.news:
+            for item in news_list:
                 news_block += f"- [{item.created_at.strftime('%Y-%m-%d %H:%M')}] {item.headline}\n"
                 if item.summary:
                     news_block += f"  Summary: {item.summary}\n"
